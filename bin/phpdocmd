@@ -1,20 +1,13 @@
 #!/usr/bin/env php
 <?php
 
+// From: http://stackoverflow.com/questions/12192882/phpdoc-to-github-wiki
+$docmdDir = dirname(__FILE__);
+set_include_path(get_include_path().PATH_SEPARATOR.$docmdDir.'/../src/Twig/lib');
 // Potential composer autoloader paths
-$paths = array(
-    __DIR__ . '/../vendor/autoload.php',
-    __DIR__ . '/../../../autoload.php',
-);
-
-foreach($paths as $path) {
-
-    if (file_exists($path)) {
-        include $path;
-        break;
-    }
-
-}
+$paths = array( $docmdDir . '/../src/PHPDocMD/Parser.php', $docmdDir . '/../src/PHPDocMD/Generator.php', $docmdDir . '/../src/Twig/lib/Twig/Autoloader.php', );
+foreach($paths as $path) { if (file_exists($path)) { include $path; print "including $path\n"; } }
+Twig_Autoloader::register();
 
 // Everts crappy option parser.
 
