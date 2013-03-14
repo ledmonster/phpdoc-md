@@ -36,7 +36,7 @@ Methods
 {% endif %}
 
 {% for method in methods %}
-* {{ method.name }}()
+* [{{ method.name }}()](#{{ method.name }})  
   *{{ method.shortdescription }}*
 {% endfor %}
 
@@ -44,15 +44,15 @@ Methods
 
 {% for method in methods %}
 
-### {{ method.name }}
-
-```php
-{{ method.signature|raw }}
-```
+### <a id="{{ method.name }}">{{ method.name }}</a>
 
 {{ method.description|raw }}
 
-* Visibility: **{{ method.visibility }}**
+
+```php
+{{ method.signature|raw }} : {{ method.return|raw }}
+```
+
 {% if method.abstract %}* This method is **abstract**.
 {% endif %}
 {% if method.static %}* This method is **static**.
@@ -63,12 +63,21 @@ Methods
 {% endif %}
 
 {% if method.arguments %}
-#### Arguments
+#### Parameters
 
 {% for argument in method.arguments %}
 * {{ argument.name }} **{% if argument.type %}{{ argument.type|classLink }}{% else %}mixed{% endif %}**{% if argument.description %} - {{ argument.description }}{% endif %}
 
+
 {% endfor %}
+
+{% endif %}
+
+
+{% if method.return and method.return != 'void' %}
+#### Returns
+
+*  **{{ method.return }}** - {{ method.returndescription }}
 
 {% endif %}
 
