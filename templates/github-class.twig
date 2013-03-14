@@ -36,6 +36,10 @@ Methods
 {% endif %}
 
 {% for method in methods %}
+* {{ method.name }}
+{% endfor %}
+
+{% for method in methods %}
 
 ### {{ method.name }}
 
@@ -64,6 +68,8 @@ Methods
 {% endfor %}
 
 {% endif %}
+
+***
 
 {% endfor %}
 
