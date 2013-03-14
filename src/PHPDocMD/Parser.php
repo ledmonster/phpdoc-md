@@ -176,6 +176,8 @@ class Parser
             }, $arguments));
 
             $signature = $return . ' ' . $className . '::' . $methodName . '('.$argumentStr.')';
+            $signature = $methodName . '('.$argumentStr.')';
+
 
             // Don't do private methods
             if ($method['visibility'] == 'private')
@@ -185,6 +187,7 @@ class Parser
 
             $methods[$methodName] = array(
                 'name' => $methodName,
+                'shortdescription' => (string)$method->docblock->description,
                 'description' => (string)$method->docblock->description . "\n\n" . (string)$method->docblock->{"long-description"},
                 'visibility' => (string)$method['visibility'],
                 'abstract'   => ((string)$method['abstract'])=="true",

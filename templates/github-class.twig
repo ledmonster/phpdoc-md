@@ -36,8 +36,11 @@ Methods
 {% endif %}
 
 {% for method in methods %}
-* {{ method.name }}
+* {{ method.name }}()
+  *{{ method.shortdescription }}*
 {% endfor %}
+
+***
 
 {% for method in methods %}
 
