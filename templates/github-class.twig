@@ -1,6 +1,5 @@
 {{ className }}
 ===============
-
 {{ description }}
 
 {{ longDescription|raw }}
@@ -30,6 +29,44 @@
 {% endif %}
 
 {% endif %}
+
+{% if methods %}
+Methods
+-------
+{% endif %}
+
+{% for method in methods %}
+
+### {{ method.name }}
+
+```php
+{{ method.signature|raw }}
+```
+
+{{ method.description|raw }}
+
+* Visibility: **{{ method.visibility }}**
+{% if method.abstract %}* This method is **abstract**.
+{% endif %}
+{% if method.static %}* This method is **static**.
+{% endif %}
+{% if method.deprecated %}* **Warning:** this method is **deprecated**. This means that this method will likely be removed in a future version.
+{% endif %}
+{% if method.definedBy != className %}* This method is defined by {{ method.definedBy|classLink }}
+{% endif %}
+
+{% if method.arguments %}
+#### Arguments
+
+{% for argument in method.arguments %}
+* {{ argument.name }} **{% if argument.type %}{{ argument.type|classLink }}{% else %}mixed{% endif %}**{% if argument.description %} - {{ argument.description }}{% endif %}
+
+{% endfor %}
+
+{% endif %}
+
+{% endfor %}
+
 
 {% if constants %}
 Constants
@@ -76,39 +113,3 @@ Properties
 
 {% endfor %}
 
-{% if methods %}
-Methods
--------
-{% endif %}
-
-{% for method in methods %}
-
-### {{ method.name }}
-
-```php
-{{ method.signature|raw }}
-```
-
-{{ method.description|raw }}
-
-* Visibility: **{{ method.visibility }}**
-{% if method.abstract %}* This method is **abstract**.
-{% endif %}
-{% if method.static %}* This method is **static**.
-{% endif %}
-{% if method.deprecated %}* **Warning:** this method is **deprecated**. This means that this method will likely be removed in a future version.
-{% endif %}
-{% if method.definedBy != className %}* This method is defined by {{ method.definedBy|classLink }}
-{% endif %}
-
-{% if method.arguments %}
-#### Arguments
-
-{% for argument in method.arguments %}
-* {{ argument.name }} **{% if argument.type %}{{ argument.type|classLink }}{% else %}mixed{% endif %}**{% if argument.description %} - {{ argument.description }}{% endif %}
-
-{% endfor %}
-
-{% endif %}
-
-{% endfor %}
