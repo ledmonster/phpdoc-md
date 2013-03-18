@@ -65,10 +65,10 @@ Methods
 {% if method.arguments %}
 #### Parameters
 
+Name | Type | Description
+-----|------|------------
 {% for argument in method.arguments %}
-* {{ argument.name }} **{% if argument.type %}{{ argument.type|classLink }}{% else %}mixed{% endif %}**{% if argument.description %} - {{ argument.description }}{% endif %}
-
-
+{{ argument.name }} | {{ argument.type|classLink }} | {{ argument.description }}
 {% endfor %}
 
 {% endif %}
