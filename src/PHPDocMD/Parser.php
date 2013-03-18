@@ -141,6 +141,8 @@ class Parser
             if (count($return)) {
                 $returnDesc = (string)$return[0]['description'];
                 $return = (string)$return[0]['type'];
+                // Make it HTML safe for using it in markdown tables.
+                $return = str_replace('|', '&#124;', $return);
             } else {
                 $returnDesc = '';
                 $return = 'mixed';

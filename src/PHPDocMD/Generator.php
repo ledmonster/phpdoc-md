@@ -86,6 +86,8 @@ class Generator
                 file_get_contents($this->templateDir . '/github-class.twig'),
                 $data
             );
+            // Fix the html code for | so we don't mess up markdown tables.
+            $output = str_replace('&amp;#124;', '&#124;', $output);
             file_put_contents($this->outputDir . '/' . $data['fileName'], $output);
 
         }
